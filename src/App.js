@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import Navbar from './pages/Navbar';
+import courses from './courses';
+import Course from './pages/Course';
+import CoursePage from './pages/CoursePage';
 
 function App() {
+  const courseElems = courses.map(course => {
+    return <Course 
+      key={course.id}
+      course={course}
+    />
+  })
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar /> 
+      <Routes>
+        <Route path="/" element={courseElems} />
+        <Route path="/:id" element={<CoursePage />} />
+      </Routes>
     </div>
   );
 }
